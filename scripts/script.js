@@ -83,3 +83,21 @@ const GameController = (() => {
 
 
 })();
+
+const renderBoard = () => {
+    const board = Gameboard.getBoard();
+    const gameboardDiv = document.getElementById("gameboard");
+    gameboardDiv.innerHTML = "";
+
+    board.forEach((marker, index) => {
+        const cell = document.createElement("div");
+        cell.textContent = marker;
+        cell.addEventListener("click", () => GameController.handleTurn(index));
+        gameboardDiv.appendChild(cell);
+    });
+};
+
+document.getElementById("restart").addEventListener("click", GameController.resetGame);
+
+// Initial render
+renderBoard();
